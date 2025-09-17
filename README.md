@@ -11,12 +11,12 @@ https://trello.com/invite/b/68bb6d700994e8f1f1e0372e/ATTI1ef5b44e9ed78c1acbec123
 ## Basic Project Data
 Group Hours: 21.5
 <br/>
-1. ***Gabriel Speer***: 
-  - **Individual Hours**: 2
-  - **Parts Obtained**:Chassis, Arduino Uno R4/R3
-2. ***Tucker Self***: 
-  - **Individual Hours**: 1
-  - **Parts Obtained**:
-3. ***Kevin Austin***: 
-  - **Individual Hours**: 1
-  - **Parts Obtained**:
+1. **Gabriel Speer**: 
+  - *Individual Hours*: 2
+  - *Parts Obtained*:Chassis, Arduino Uno R4/R3
+2. **Tucker Self**: 
+  - *Individual Hours*: 1
+  - *Parts Obtained*:
+3. **Kevin Austin**: 
+  - *Individual Hours*: 1
+  - *Parts Obtained*:
