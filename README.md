@@ -11,9 +11,9 @@ Group Hours: 21.5
   - Parts Obtained:Chassis, Arduino Uno R4/R3
 <br/>
 2.Tucker Self: 
-  - Individual Hours:
+  - Individual Hours: 1
   - Parts Obtained:
 <br/>
 3.Kevin Austin: 
-  - Individual Hours:
+  - Individual Hours: 1
   - Parts Obtained:
