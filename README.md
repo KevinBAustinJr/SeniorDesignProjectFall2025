@@ -6,12 +6,12 @@ Progress Tracker (Updated):https://trello.com/invite/b/68bb6d700994e8f1f1e0372e/
 ## Basic Project Data
 Group Hours: 21.5
 <br/>
-1.**Gabriel Speer**: 
+1. **Gabriel Speer**: 
   - Individual Hours: 2
   - Parts Obtained:Chassis, Arduino Uno R4/R3
-2.**Tucker Self**: 
+2. **Tucker Self**: 
   - Individual Hours: 1
   - Parts Obtained:
-3.**Kevin Austin**: 
+3. **Kevin Austin**: 
   - Individual Hours: 1
   - Parts Obtained:
