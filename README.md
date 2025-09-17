@@ -9,11 +9,9 @@ Group Hours: 21.5
 1.**Gabriel Speer**: 
   - Individual Hours: 2
   - Parts Obtained:Chassis, Arduino Uno R4/R3
-<br/>
 2.**Tucker Self**: 
   - Individual Hours: 1
   - Parts Obtained:
-<br/>
 3.**Kevin Austin**: 
   - Individual Hours: 1
   - Parts Obtained:
