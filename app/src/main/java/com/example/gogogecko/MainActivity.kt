@@ -4,44 +4,69 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.*
 import com.example.gogogecko.ui.theme.GoGoGeckoTheme
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var mqttHelper: MqttHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        mqttHelper = MqttHelper(this)
+
         setContent {
             GoGoGeckoTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+                var status by remember { mutableStateOf("Connecting...") }
+                val messages = remember { mutableStateListOf<String>() }
+                val incomingMessages = remember { mutableStateListOf<String>() }
+
+                // Connect to MQTT and subscribe to bot status
+                LaunchedEffect(Unit) {
+                    try {
+                        mqttHelper.connect(
+                            onConnected = { status = "Connected!" },
+                            onFailure = { e -> status = "Failed: ${e.message}" }
+                        )
+
+                        mqttHelper.subscribe(
+                            topic = "deliveryBot/1234/status",
+                            onMessageReceived = { msg -> incomingMessages.add(msg) }
+                        )
+                    } catch (e: Exception) {
+                        status = "MQTT Exception: ${e.message}"
+                    }
                 }
+
+
+                DropoffScreen(
+                    status = status,
+                    messages = messages,
+                    incomingMessages = incomingMessages,
+                    onSend = { location ->
+                        try {
+                            mqttHelper.publishDropoff(location)
+                            messages.add("Sent: $location")
+                            status = "Sent $location"
+                        } catch (e: Exception) {
+                            status = "Send failed: ${e.message}"
+                        }
+                    }
+                )
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    GoGoGeckoTheme {
-        Greeting("Android")
+    override fun onDestroy() {
+        if (::mqttHelper.isInitialized) {
+            try {
+                mqttHelper.disconnect()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        super.onDestroy()
     }
 }
