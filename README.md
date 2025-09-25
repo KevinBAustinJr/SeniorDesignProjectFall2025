@@ -15,7 +15,7 @@ Group Hours: 21.5
   - *Individual Hours*: 10
   - *Parts Obtained*:Chassis, Arduino Uno R4/R3,3d Printer,PLA Filament
 2. **Tucker Self**: 
-  - *Individual Hours*: 1
+  - *Individual Hours*: 5
   - *Parts Obtained*:
 3. **Kevin Austin**: 
   - *Individual Hours*: 1

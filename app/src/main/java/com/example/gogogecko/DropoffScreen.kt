@@ -1,8 +1,12 @@
 package com.example.gogogecko
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -13,29 +17,37 @@ fun DropoffScreen(
     incomingMessages: List<String>,
     onSend: (String) -> Unit
 ) {
+    var input by remember { mutableStateOf("") }
+    val scrollState = rememberScrollState()
+
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(16.dp)) {
+        .padding(16.dp)
+        .verticalScroll(scrollState),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text("Status: $status")
 
-        Text(text = "Status: $status", style = MaterialTheme.typography.titleMedium)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { onSend("FrontDoor") }) {
-            Text("Send Dropoff to FrontDoor")
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = { onSend("BackDoor") }) {
-            Text("Send Dropoff to BackDoor")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("Sent Messages:", style = MaterialTheme.typography.titleMedium)
+        Text("Incoming Messages:")
         messages.forEach { Text(it) }
 
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("Incoming Messages:", style = MaterialTheme.typography.titleMedium)
+        Text("Outgoing Messages:")
         incomingMessages.forEach { Text(it) }
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            BasicTextField(
+                value = input,
+                onValueChange = { input = it },
+                modifier = Modifier.weight(1f)
+            )
+            Button(onClick = {
+                if (input.isNotBlank()) {
+                    onSend(input)
+                    input = ""
+                }
+            }) {
+                Text("Send")
+            }
+        }
     }
 }
-

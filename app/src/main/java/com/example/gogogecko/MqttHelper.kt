@@ -2,19 +2,23 @@ package com.example.gogogecko
 
 import android.content.Context
 import org.eclipse.paho.android.service.MqttAndroidClient
-import org.eclipse.paho.client.mqttv3.*
+import org.eclipse.paho.client.mqttv3.IMqttActionListener
+import org.eclipse.paho.client.mqttv3.IMqttToken
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions
+import org.eclipse.paho.client.mqttv3.MqttMessage
 
 class MqttHelper(context: Context) {
 
     private val clientId = "DeliveryApp-" + System.currentTimeMillis()
-    private val brokerUrl = "ssl://f24f53fa64fe4683b1a503f541edbfcc.s1.eu.hivemq.cloud:8883"
+    private val brokerHost = "f24f53fa64fe4683b1a503f541edbfcc.s1.eu.hivemq.cloud"
+    private val brokerPort = 8883
+    private val brokerUrl = "ssl://$brokerHost:$brokerPort"
 
-    private val mqttClient =
-        MqttAndroidClient(context.applicationContext, brokerUrl, clientId)
+    private val mqttClient = MqttAndroidClient(context.applicationContext, brokerUrl, clientId)
 
     private val options = MqttConnectOptions().apply {
-        userName = "yourMqttUser"            // replace with your MQTT username
-        password = "yourMqttPassword".toCharArray() // replace with your MQTT password
+        userName = "Admin"
+        password = "Pikachu25".toCharArray()
         isAutomaticReconnect = true
         isCleanSession = true
     }
@@ -27,15 +31,14 @@ class MqttHelper(context: Context) {
         })
     }
 
-    fun publishDropoff(location: String) {
-        val topic = "deliveryBot/1234/dropoff"
-        val message = MqttMessage(location.toByteArray()).apply { qos = 1 }
+    fun publish(topic: String, messageStr: String, qos: Int = 1) {
+        val message = MqttMessage(messageStr.toByteArray()).apply { this.qos = qos }
         mqttClient.publish(topic, message)
     }
 
-    fun subscribe(topic: String, onMessageReceived: (String) -> Unit) {
+    fun subscribe(topic: String, qos: Int = 1, onMessageReceived: (String) -> Unit) {
         try {
-            mqttClient.subscribe(topic, 1) { _, message ->
+            mqttClient.subscribe(topic, qos) { _, message ->
                 onMessageReceived(message.toString())
             }
         } catch (e: Exception) {

@@ -8,14 +8,14 @@ espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.9.4"
 activityCompose = "1.11.0"
 composeBom = "2025.09.01"
-paho = "1.2.5"
-pahoAndroid = "1.1.1"
-localbroadcastmanager = "1.1.0"
+paho-androidx-service = "1.1.1"
+paho-client = "1.2.5"
+localbroadcast = "1.1.0"
 
 [libraries]
-androidx-localbroadcastmanager = { module = "androidx.localbroadcastmanager:localbroadcastmanager", version.ref = "localbroadcastmanager" }
-paho-client = { module = "org.eclipse.paho:org.eclipse.paho.client.mqttv3", version.ref = "paho" }
-paho-android = { module = "org.eclipse.paho:org.eclipse.paho.android.service", version.ref = "pahoAndroid" }
+paho-androidx-service = { module = "com.github.gilyes:paho-androidx-service", version.ref = "paho-androidx-service" }
+paho-client = { module = "org.eclipse.paho:org.eclipse.paho.client.mqttv3", version.ref = "paho-client" }
+localbroadcast = { module = "androidx.localbroadcastmanager:localbroadcastmanager", version.ref = "localbroadcast" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -35,4 +35,5 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
 

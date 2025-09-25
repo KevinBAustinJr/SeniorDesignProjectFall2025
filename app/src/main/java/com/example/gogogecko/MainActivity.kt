@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
+import androidx.lifecycle.lifecycleScope
 import com.example.gogogecko.ui.theme.GoGoGeckoTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -14,6 +16,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         mqttHelper = MqttHelper(this)
 
         setContent {
@@ -23,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 val messages = remember { mutableStateListOf<String>() }
                 val incomingMessages = remember { mutableStateListOf<String>() }
 
-                // Connect to MQTT and subscribe to bot status
+                // Connect and subscribe
                 LaunchedEffect(Unit) {
                     try {
                         mqttHelper.connect(
@@ -31,15 +34,13 @@ class MainActivity : ComponentActivity() {
                             onFailure = { e -> status = "Failed: ${e.message}" }
                         )
 
-                        mqttHelper.subscribe(
-                            topic = "deliveryBot/1234/status",
-                            onMessageReceived = { msg -> incomingMessages.add(msg) }
-                        )
+                        mqttHelper.subscribe("deliveryBot/1234/status") { msg ->
+                            incomingMessages.add(msg)
+                        }
                     } catch (e: Exception) {
-                        status = "MQTT Exception: ${e.message}"
+                        status = "MQTT Error: ${e.message}"
                     }
                 }
-
 
                 DropoffScreen(
                     status = status,
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     incomingMessages = incomingMessages,
                     onSend = { location ->
                         try {
-                            mqttHelper.publishDropoff(location)
+                            mqttHelper.publish("deliveryBot/1234/dropoff", location)
                             messages.add("Sent: $location")
                             status = "Sent $location"
                         } catch (e: Exception) {
@@ -60,13 +61,12 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
-        if (::mqttHelper.isInitialized) {
-            try {
-                mqttHelper.disconnect()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
         super.onDestroy()
+        try {
+            mqttHelper.disconnect()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
+
