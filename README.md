@@ -18,5 +18,5 @@ Group Hours: 23
   - *Individual Hours*: 5
   - *Parts Obtained*:
 3. **Kevin Austin**: 
-  - *Individual Hours*: 7
-  - *Parts Obtained*:
+  - *Individual Hours*: 9
+  - *Parts Obtained*:XT60 Plug Connector, Dupont Connectors, Digital Servo Motor, Lipo Batteries, TB6612FNG Dual Motor Driver Controllers, Buck Power Converter Modules
