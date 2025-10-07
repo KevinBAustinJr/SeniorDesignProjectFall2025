@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoGoGecko Delivery Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1> GoGoGecko Delivery Hub</h1>
+  </header>
+
+  <main>
+    <!-- Robot Status -->
+    <section class="card status">
+      <h2>Robot Status</h2>
+      <p id="status-text"> Idle</p>
+    </section>
+
+    <!-- Mission Control -->
+    <section class="card">
+      <h2>Assign Delivery Mission</h2>
+      <label for="destination">Select Destination:</label>
+<select id="destination">
+  <option value="">-- Choose a destination --</option>
+  <option value="lockerA">Locker A</option>
+  <option value="lockerB">Locker B</option>
+  <option value="kitchen">Kitchen</option>
+  <option value="frontDoor">Front Door</option>
+  <option value="chargingStation">Charging Station</option>
+</select>
+<button class="btn" id="sendMission">Send Mission</button>
+    </section>
+
+    <!-- Compartment Control -->
+<section class="card">
+  <h2>Compartment Access</h2>
+  
+  <!-- PIN Generator (for your account) -->
+  <div class="pin-section">
+    <h3>Generate Access PIN</h3>
+    <button class="btn" id="generatePin">Generate PIN</button>
+    <p id="generatedPin">PIN: --</p>
+  </div>
+
+  <hr>
+
+  <!-- PIN Entry (simulates what someone entering on the keypad would do) -->
+  <div class="pin-entry">
+    <h3>Enter PIN</h3>
+    <input type="text" id="enteredPin" placeholder="Enter 6-digit PIN" maxlength="6">
+    <button class="btn success" id="submitPin">Unlock Compartment</button>
+  </div>
+
+  <hr>
+
+  <!-- Lock status display -->
+  <div id="lockStatus" class="status-display">
+     Status: Locked
+  </div>
+</section>
+
+    <!-- Live Data -->
+    <section class="card">
+      <h2>Sensor Data</h2>
+      <div id="data-box">
+        <p>Left Motor Encoder: <span>--</span></p>
+        <p>Right Motor Encoder: <span>--</span></p>
+        <p>Sound Sensor: <span>--</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>GoGoGecko © 2025</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
