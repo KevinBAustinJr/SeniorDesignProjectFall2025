@@ -2,35 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>GoGoGecko Admin Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-  <h1>Admin Dashboard</h1>
-  <button id="logoutBtn">Logout</button>
+  <header>
+    <h1>GoGoGecko Admin Dashboard</h1>
+    <button id="logoutBtn">Logout</button>
+  </header>
 
+  <main>
+  <!-- Quick Stats -->
+  <section class="stats-container">
+    <div class="stat-card"><h3>Active Bots</h3><p id="activeBots">0</p></div>
+    <div class="stat-card"><h3>Deliveries Today</h3><p id="deliveriesToday">0</p></div>
+    <div class="stat-card"><h3>Errors</h3><p id="errorCount">0</p></div>
+    <div class="stat-card"><h3>Avg Battery</h3><p id="avgBattery">0%</p></div>
+  </section>
+
+  <!-- USERS -->
   <section>
     <h2>Users</h2>
     <table id="usersTable">
       <thead>
-        <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th></tr>
+        <tr>
+          <th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Created</th>
+        </tr>
       </thead>
       <tbody></tbody>
     </table>
   </section>
 
+  <!-- BOTS -->
+  <section>
+    <h2>Bots</h2>
+    <table id="botsTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Status</th><th>Battery</th><th>Last Check-in</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- DELIVERIES -->
   <section>
     <h2>Deliveries</h2>
     <table id="deliveriesTable">
       <thead>
-        <tr><th>ID</th><th>Bot</th><th>Status</th><th>User</th></tr>
+        <tr>
+          <th>ID</th><th>Bot</th><th>Status</th><th>User</th><th>Created</th><th>Started</th><th>Completed</th>
+        </tr>
       </thead>
       <tbody></tbody>
     </table>
   </section>
 
-  <!-- Add more sections for bots, logs, locations as needed -->
+  <!-- SYSTEM LOGS -->
+  <section>
+    <h2>Recent System Logs</h2>
+    <table id="logsTable">
+      <thead>
+        <tr>
+          <th>Time</th><th>Bot</th><th>Event</th><th>Message</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
 
-  <script src="script.js"></script>
+  <!-- OPTIONAL ADVANCED TAB -->
+  <details>
+    <summary>Advanced / Developer Tables</summary>
+
+    <section>
+      <h3>Locations</h3>
+      <table id="locationsTable">...</table>
+    </section>
+
+    <section>
+      <h3>Path Edges</h3>
+      <table id="pathsTable">...</table>
+    </section>
+
+    <section>
+      <h3>Servo Logs</h3>
+      <table id="servosTable">...</table>
+    </section>
+
+    <section>
+      <h3>Sensor Logs</h3>
+      <table id="sensorsTable">...</table>
+    </section>
+
+    <section>
+      <h3>Path History</h3>
+      <table id="pathHistoryTable">...</table>
+    </section>
+  </details>
+</main>
+ <script type="module" src="/js/dashboard.js"></script>
+ <script src="/js/auth.js"></script>
 </body>
 </html>
