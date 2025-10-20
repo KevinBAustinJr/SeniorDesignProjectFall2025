@@ -9,10 +9,10 @@ https://trello.com/invite/b/68bb6d700994e8f1f1e0372e/ATTI1ef5b44e9ed78c1acbec123
 <br/>
 **Group Members**: Gabriel Speer, Tucker Self, Kevin Austin
 ## Basic Project Data
-Group Hours: 25
+Group Hours: 30
 <br/>
 1. **Gabriel Speer**: 
-  - *Individual Hours*: 32
+  - *Individual Hours*: 38
   - *Parts Obtained*:Chassis, Arduino Uno R4/R3,3d Printer,PLA Filament
 2. **Tucker Self**: 
   - *Individual Hours*: 18
