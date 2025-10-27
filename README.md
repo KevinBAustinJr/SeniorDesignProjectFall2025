@@ -15,7 +15,7 @@ Group Hours: 30
   - *Individual Hours*: 40
   - *Parts Obtained*:Chassis, Arduino Uno R4/R3,3d Printer,PLA Filament
 2. **Tucker Self**: 
-  - *Individual Hours*: 30
+  - *Individual Hours*: 34
   - *Parts Obtained*: OONO 16 Amp 2x12 Position Terminal Block Distribution Module, Electrolytic Capacitors, ELEGOO 5PCS HC-SR04 Ultrasonic Module Distance Sensor, YEJMKJ 3pcs ESP-WROOM-32 ESP32 ESP-32S Development Board, 52PCS 2.54mm 0.1" Pitch PCB Mount Screw Terminal Block Connector
 3. **Kevin Austin**: 
   - *Individual Hours*: 48
